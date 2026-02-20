@@ -1,0 +1,21 @@
+import requests
+from telegram import Update
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+
+TOKEN = "TU_TOKEN_AQUI"
+
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("Bot de estadísticas activo ⚽")
+
+async def corners(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("Promedio corners: 9.4\nOver 8.5 recomendado")
+
+async def goles(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("Probabilidad Over 2.5: 62%")
+
+app = ApplicationBuilder().token(TOKEN).build()
+app.add_handler(CommandHandler("start", start))
+app.add_handler(CommandHandler("corners", corners))
+app.add_handler(CommandHandler("goles", goles))
+
+app.run_polling()
